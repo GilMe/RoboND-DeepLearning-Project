@@ -36,7 +36,7 @@ import os
 from scipy import misc
 
 #
-#from utils import plotting_tools
+from utils import plotting_tools
 #
 
 
@@ -149,9 +149,9 @@ def score_run_iou(gt_dir, pred_dir):
             else:
                 n_false_neg += 1
                 #my add: plotting bad images
-                print(e)
-                im_tuple = plotting_tools.load_images([gt_files_images[e], gt_files[e], pred_files[e]])
-                plotting_tools.show_images(im_tuple)
+                #print(e)
+                #im_tuple = plotting_tools.load_images([gt_files_images[e], gt_files[e], pred_files[e]])
+                #plotting_tools.show_images(im_tuple)
 
         else:
             if pred_mask[:, :, 2].sum() > 3:

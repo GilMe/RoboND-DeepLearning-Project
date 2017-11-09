@@ -35,6 +35,10 @@ import glob
 import os 
 from scipy import misc
 
+#
+#from utils import plotting_tools
+#
+
 
 def intersection_over_union(y_true, y_pred):
     """Computes the intersection over union of to arrays containing 1's and 0's
@@ -117,6 +121,9 @@ def get_centroid_largest_blob(seg_mask):
 
 
 def score_run_iou(gt_dir, pred_dir):
+    #
+    gt_files_images = sorted(glob.glob(os.path.join(gt_dir, 'images', '*.jpeg')))
+    #
     gt_files = sorted(glob.glob(os.path.join(gt_dir, 'masks', '*.png')))
     pred_files = sorted(glob.glob(os.path.join(pred_dir, '*.png')))
     ious = [0,0,0]
@@ -141,6 +148,10 @@ def score_run_iou(gt_dir, pred_dir):
                 n_true_pos += 1
             else:
                 n_false_neg += 1
+                #my add: plotting bad images
+                print(e)
+                im_tuple = plotting_tools.load_images([gt_files_images[e], gt_files[e], pred_files[e]])
+                plotting_tools.show_images(im_tuple)
 
         else:
             if pred_mask[:, :, 2].sum() > 3:
